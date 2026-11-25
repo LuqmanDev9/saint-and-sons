@@ -77,12 +77,12 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  fetch("http://localhost:5000/api/services")
+  fetch(`${API_URL}/api/services`)
     .then((res) => res.json())
     .then(setServices)
     .catch(console.error);
 
-  fetch("http://localhost:5000/api/barbers")
+  fetch(`${API_URL}/api/barbers`)
     .then((res) => res.json())
     .then(setBarbers)
     .catch(console.error);
@@ -130,9 +130,7 @@ useEffect(() => {
   };
 
   try {
-    const response = await fetch(
-      "http://localhost:5000/api/bookings",
-      {
+    const response = await fetch(`${API_URL}/api/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -635,3 +633,7 @@ useEffect(() => {
     </main>
   );
 }
+
+const API_URL =
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:5000";
